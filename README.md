@@ -9,6 +9,8 @@
 [![code license](https://img.shields.io/badge/code-MIT-green)](LICENSE)
 [![text license](https://img.shields.io/badge/text-CC%20BY%204.0-green)](LICENSE-TEXT.md)
 
+**Read now:** [full paper (PDF)](paper/main.pdf) · [one-page summary (PDF)](paper/onepager.pdf)
+
 ## Result
 
 For a finite weighted comparison graph `g` and a rational-valued field `Phi`, define
@@ -76,11 +78,13 @@ See [`REPRODUCE.md`](REPRODUCE.md) for exact commands and the limits of what com
 | [`docs/THEOREMS.md`](docs/THEOREMS.md) | Result index and dependency roles |
 | [`docs/CLAIM_MATRIX.md`](docs/CLAIM_MATRIX.md) | Informal claim to theorem correspondence |
 | [`docs/ARTIFACT_EVALUATION.md`](docs/ARTIFACT_EVALUATION.md) | Reviewer-oriented evaluation protocol |
-| [`paper/main.tex`](paper/main.tex) | Full paper source |
+| [`paper/main.tex`](paper/main.tex) | Canonical full-paper build entry point |
+| [`paper/main.pdf`](paper/main.pdf) | CI-built convenience copy of the full paper |
 | [`paper/onepager.tex`](paper/onepager.tex) | One-page technical summary source |
+| [`paper/onepager.pdf`](paper/onepager.pdf) | CI-built convenience copy of the one-page summary |
 | [`CITATION.cff`](CITATION.cff) | Machine-readable citation metadata |
 
-PDFs are built in CI and attached to tagged GitHub releases; generated PDFs are not treated as source files.
+The LaTeX sources are canonical. CI builds both PDFs, and after a successful verified push to `main`, the `publish-pdfs` workflow refreshes the tracked convenience copies. Tagged releases also include PDFs and checksums.
 
 ## Reproduce the paper
 

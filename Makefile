@@ -27,4 +27,4 @@ check: verify paper audit
 
 clean:
 	@rm -f coq/*.vo coq/*.vok coq/*.vos coq/*.glob coq/.*.aux
-	@rm -f paper/*.aux paper/*.log paper/*.out paper/*.pdf
+	@rm -f paper/*.aux paper/*.log paper/*.out
