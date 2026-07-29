@@ -1,0 +1,194 @@
+\documentclass[10pt,twocolumn]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{mathpazo}
+\usepackage[scaled=0.88]{helvet}
+\usepackage{courier}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage[margin=0.85in,columnsep=0.28in]{geometry}
+
+\hypersetup{
+  pdftitle={What a Zero Readout Certifies},
+  pdfauthor={Yaoharee Lahtee},
+  pdfsubject={Philosophy of mathematics; foundations of measurement},
+  pdfkeywords={zero, distinction, equivalence class, readout, graph Laplacian, formal verification}
+}
+
+\titleformat{\section}{\normalfont\bfseries\large}{\thesection.}{0.55em}{}
+\titleformat{\subsection}{\normalfont\itshape}{\thesubsection.}{0.6em}{}
+\titlespacing*{\section}{0pt}{1.6ex plus .3ex}{0.8ex}
+\titlespacing*{\subsection}{0pt}{1.1ex plus .3ex}{0.5ex}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\footnotesize\itshape What a Zero Readout Certifies}
+\fancyhead[R]{\footnotesize\itshape (preprint version)\quad\upshape\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \fancyhead[R]{\footnotesize\itshape (preprint version)}%
+  \renewcommand{\headrulewidth}{0pt}%
+}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\zeroQ}{0_{\Q}}
+\newcommand{\zerog}{\mathbf{0}_{g}}
+
+\setlength{\parindent}{1.2em}
+\setlength{\emergencystretch}{2.5em}
+
+\title{\vspace{-2.2em}\textbf{\large What a Zero Readout Certifies}\\[0.25em]
+\normalfont\normalsize Zero as the failure locus of retained distinction\vspace{-0.4em}}
+
+\author{
+  \normalsize Yaoharee Lahtee\\[0.15em]
+  \footnotesize Open Civil Science Initiative, Pattani, Thailand\\
+  \footnotesize ORCID: \href{https://orcid.org/0009-0005-3861-0626}{0009-0005-3861-0626}\\[0.25em]
+  \footnotesize DOI: \href{https://doi.org/10.5281/zenodo.21665100}{10.5281/zenodo.21665100}
+  \ \ \textbullet\ \ Code and proofs: \href{https://github.com/morrocwi/zero-readout-certifies}{github.com/morrocwi/zero-readout-certifies}
+}
+\date{}
+
+\begin{document}
+\twocolumn[
+\begin{@twocolumnfalse}
+\maketitle
+\begin{abstract}
+\noindent
+\small
+Arithmetic supplies the symbol $0$. It does not, by itself, say what a measurement returning that symbol has established. This paper answers that question for a setting whose primitive is the retained difference---the assertion that two things are told apart under finite access---and whose readings are finite and rational. In such a setting zero is anomalous: it arrives in the same register as every other value, yet reports that the primitive did not fire. We show that a zero readout is not an absence but a classification, and prove which one. For the retained-information operator on a positively weighted comparison graph, the zero locus coincides, in both directions, with the locus at which no difference is retained across the declared structure; equivalently, with the fields constant on each connected component. The characterisation is machine-checked over the rationals without classical axioms. Two clarifications carry much of the philosophical weight. The claim is not a redefinition of arithmetic zero, which remains an ordinary rational and an ordinary constructor of number; we mark the arithmetic value and its fibre with different symbols throughout. And the class is relative to the declared structure of comparison rather than absolute, as an example shows in which the operator returns zero on a field that is neither empty nor pointwise zero, and a second in which it returns zero on a field that is not constant. We locate the position against Frege, structuralism, Spencer-Brown's unmarked state, pseudometric quotients, operational equivalence, and the standard kernel result for graph Laplacians, stating in each case what is borrowed and what is not.
+\end{abstract}
+\vspace{1.2em}
+\end{@twocolumnfalse}
+]
+\thispagestyle{plain}
+
+%% ==================================================================
+\section{The question}
+
+Zero is not one question but several, and they are usually run together.
+
+There is a question about the arithmetic object: what kind of thing is the number $0$, and what makes statements about it true? Frege answered by way of cardinality \cite{frege1884}, set theory by way of the empty set, structuralism by way of position in a pattern \cite{benacerraf1965,shapiro1997}. These are live and long-argued positions, and nothing here is offered as a rival to them.
+
+There is a distinct question, less often separated out, about zero as an \emph{output}. An instrument, a computation, a comparison operator---anything that reads a situation and returns a number---may return zero. What has it thereby established? The answer cannot be read off the arithmetic. Knowing what kind of object $0$ is does not tell you what a device claims when it hands you one.
+
+The distinction matters most where \emph{difference} is primitive rather than derived. Suppose the ground notion is that two things are told apart, under finite access, with a finite record retained. Number is then generated rather than assumed, and every quantity a reader obtains is the record of some distinction. Zero occupies an odd position in such a setting. It arrives in the same register as every other value---a rational like any other---yet what it reports is that the primitive did not fire. It is the one output that is not the record of a distinction.
+
+This paper asks what that output certifies, and answers with a theorem rather than a stipulation.
+
+%% ==================================================================
+\section{The setting}
+
+Three commitments fix the setting. They are stated here in the form the argument uses; nothing below depends on any further development of them.
+
+\paragraph{The primitive.} The ground notion is the \emph{retained difference}: that two things are told apart, with a finite record. Number is generated from a ground together with a successor read as ``retain one more distinction''. Nothing in the object language is assumed beneath the primitive.
+
+\paragraph{The reading contract.} Every quantity a reader obtains is a rational, delivered at a declared finite resolution. Completed infinities, the real line as a primitive, and the point of zero extent are not in the range of any reading. This constrains what may be emitted; it is not a claim about what exists. One consequence is used repeatedly below: a difference lying outside the range of every admissible reading is not something the setting can assert.
+
+\paragraph{The verdict type.} A reader at a finite resolution may fail to determine anything. Readings therefore take values in a type carrying, besides the signed values and zero, a distinct least element $\bot$ for the unresolved case. That $\bot$ carries no numeric field is a typing constraint rather than a convention: no path extracts a number from an unresolved reading. Section \ref{sec:refusal} argues that $\bot$ and zero are absences of different kinds and must not be identified.
+
+\paragraph{The comparison operator.} Distinctions are compared across a \emph{declared structure}: a finite weighted graph $g$ whose edges $(i,j,w)$ state which pairs are to be compared and with what weight, together with a field $\Phi$ assigning a rational to each vertex. The retained information of $\Phi$ is
+\begin{equation}\label{eq:I}
+I_g(\Phi)\;=\;\sum_{(i,j,w)\in g} w\,(\Phi_i-\Phi_j)^2 .
+\end{equation}
+
+The graph is not a picture of the world. It is a statement of which distinctions this reader is arranged to retain. Two vertices joined by no path are two things the reader was never set up to compare---a point that becomes load-bearing in §\ref{sec:relative}.
+
+\begin{remark}[The operator is a Dirichlet form]\label{rem:dirichlet}
+Writing $L_R=D_W-W$ for the graph Laplacian, a one-line ring identity per edge gives
+\[
+w\Phi_i^2+w\Phi_j^2-2w\Phi_i\Phi_j \;=\; w(\Phi_i-\Phi_j)^2,
+\]
+and summing over the edge list yields $\Phi^{\top}L_R\Phi=I_g(\Phi)$. So \eqref{eq:I} is the Dirichlet form of $L_R$, and everything below about $I_g$ is equally a statement about that operator. Nothing in the argument requires this identification; it is recorded because it locates \eqref{eq:I} in familiar territory.
+\end{remark}
+
+%% ==================================================================
+\section{The kernel}\label{sec:kernel}
+
+Equation \eqref{eq:I} says what the operator computes. The question of §1 concerns what it means when the computation returns zero, and that is a question about the operator's zero locus.
+
+We work over $\Q$ throughout; no completion and no limit appears, and equality on $\Q$ is decidable. Strict positivity of the weights is assumed in the theorems and is not cosmetic: an edge of weight zero contributes nothing to $I_g$ regardless of the field, so a single such edge would let a genuine distinction hide inside the zero locus.
+
+\begin{lemma}[Vanishing square]\label{lem:sq}
+For $x\in\Q$, if $x\cdot x=0$ then $x=0$.
+\end{lemma}
+
+\begin{proof}
+$\Q$ is an integral domain, so the product vanishing yields the disjunction $x=0$ or $x=0$; both disjuncts are the same statement.
+\end{proof}
+
+\begin{lemma}[Vanishing sum of nonnegatives]\label{lem:sum}
+For $a,b\in\Q$ with $a,b\ge0$ and $a+b=0$, both $a=0$ and $b=0$.
+\end{lemma}
+
+\begin{proof}
+From $b\ge0$, $a=a+0\le a+b=0$; with $a\ge0$, antisymmetry gives $a=0$, and substitution gives $b=0$.
+\end{proof}
+
+\begin{lemma}[Edge criterion]\label{lem:edge}
+For an edge $(i,j,w)$ with $w>0$: the edge term $w(\Phi_i-\Phi_j)^2$ vanishes if and only if $\Phi_i=\Phi_j$.
+\end{lemma}
+
+\begin{proof}
+If the product vanishes then by integrality either $w=0$, excluded, or the square vanishes, whence $\Phi_i=\Phi_j$ by Lemma \ref{lem:sq}. The converse is immediate.
+\end{proof}
+
+\begin{lemma}[Termwise vanishing]\label{lem:termwise}
+If every weight of $g$ is nonnegative and $I_g(\Phi)=0$, then every edge term vanishes.
+\end{lemma}
+
+\begin{proof}
+Induction on the edge list. Each term is a nonnegative weight times a square, hence nonnegative, as is the sum over the tail; Lemma \ref{lem:sum} splits the vanishing sum at the head, and the tail case is the induction hypothesis.
+\end{proof}
+
+\begin{remark}
+Lemma \ref{lem:termwise} assumes only $w\ge0$, weaker than the $w>0$ used below. The separation is deliberate: termwise vanishing needs only nonnegativity, and strict positivity is spent at exactly one point---Lemma \ref{lem:edge}---to prevent a vanishing weight from absorbing a real distinction.
+\end{remark}
+
+\begin{theorem}[Kernel, edge form]\label{thm:edge}
+Let every weight of $g$ be strictly positive. Then for every field $\Phi$,
+\[
+I_g(\Phi)=0
+\quad\Longleftrightarrow\quad
+\Phi_i=\Phi_j \ \text{ for every edge } (i,j,w) \text{ of } g .
+\]
+\end{theorem}
+
+\begin{proof}
+($\Rightarrow$) By Lemma \ref{lem:termwise}, every edge term vanishes; Lemma \ref{lem:edge} converts each to $\Phi_i=\Phi_j$. ($\Leftarrow$) Induction on the edge list: the head term vanishes by Lemma \ref{lem:edge}, reducing the sum to the tail, to which the hypothesis applies.
+\end{proof}
+
+Let $\mathrm{reach}_g$ be the reflexive--transitive closure of the relation ``some edge of $g$ joins $i$ and $j$ in either orientation'', defined inductively.
+
+\begin{theorem}[Kernel, component form]\label{thm:component}
+Under the same hypothesis, for every field $\Phi$,
+\[
+I_g(\Phi)=0
+\quad\Longleftrightarrow\quad
+\Phi_i=\Phi_j \ \text{ whenever } \mathrm{reach}_g(i,j),
+\]
+that is, if and only if $\Phi$ is constant on every connected component of $g$.
+\end{theorem}
+
+\begin{proof}
+($\Rightarrow$) 
