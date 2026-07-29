@@ -1,0 +1,72 @@
+thout alteration.
+
+\subsection{Spencer-Brown's unmarked state}
+Of the positions surveyed this is the closest in spirit. \emph{Laws of Form} begins with the injunction to draw a distinction and takes the unmarked state as the condition prior to any mark \cite{spencerbrown1969}. Anyone reading an account whose primitive is distinction will hear the echo, and it should be acknowledged rather than left implicit.
+
+The departure is structural. For Spencer-Brown the unmarked state is \emph{primitive}: a starting point of the calculus of indication, prior to and presupposed by every mark. Here non-distinction is \emph{derived}---the zero locus of a quantitative operator, characterised biconditionally, conditioned on a hypothesis ($w>0$) whose necessity is exhibited. The calculus of indication also has no occasion to separate the unmarked state from a reader's failure to resolve, whereas §\ref{sec:refusal} requires that separation and locates it in the type. The present account is therefore not a quantitative restatement of \emph{Laws of Form}; it is an account of what a quantitative operator's vanishing certifies, in a setting where a determinate zero and an unresolved value must be told apart.
+
+\subsection{Pseudometrics and quotients}
+Mathematically this is the nearest neighbour. In a pseudometric space $d(x,y)=0$ is compatible with $x\neq y$, and the standard quotient collapses precisely the points at distance zero; in a quotient vector space every element of the subspace quotiented out becomes the same zero, so the zero of a quotient is already a class rather than a distinguished element \cite{kelley1955}. Proposition \ref{prop:sub} is an instance of that construction and no priority is claimed over it.
+
+The addition is not the construction but a theorem about it. Quotient theory tells us that identifying points at distance zero yields a metric; it does not tell us what the zero being quotiented by \emph{means}. Theorems \ref{thm:edge} and \ref{thm:component} supply that here by showing the zero locus coincides, in both directions, with the locus at which the primitive fails. The honest formulation is that this account is not independent of quotient mathematics: it gives one quotient class a foundational interpretation together with a faithfulness theorem.
+
+\subsection{Operational equivalence}
+Operational approaches in physics define a state as an equivalence class of preparations that no admitted experiment separates. This is the ``relative to a readout'' clause of §\ref{sec:relative} in another setting, and the parallel is close. The difference is one of selection. Operational equivalence treats all classes alike: every observationally indistinguishable pair is grouped and no class is privileged. The present account singles out one class, $\zerog$, and characterises it by a property the others lack---being exactly the locus at which the primitive fails to fire.
+
+\subsection{The standard kernel result}
+Over the reals it is standard that the Dirichlet energy of a function on a weighted graph vanishes iff the function is constant on components, a fact tied to the zero eigenvalue's multiplicity counting components \cite{chung1997,godsil2001}. Theorems \ref{thm:edge} and \ref{thm:component} claim no novelty against that literature.
+
+What is offered differs in kind from a new graph-theoretic fact: the placement of a known kernel result as a \emph{faithfulness condition} on a distinction-based account---the demonstration that the operator's zero locus and the primitive's failure locus coincide in both directions, over $\Q$, with the required hypothesis made explicit, and checked without classical axioms.
+
+%% ==================================================================
+\section{What is claimed}\label{sec:claimed}
+
+It is worth separating the claim from what surrounds it, since each surrounding item is standard.
+
+The mathematics of §\ref{sec:kernel} is elementary and is classical over $\R$. The construction of Proposition \ref{prop:sub} is the standard quotient. The relativity of §\ref{sec:relative} has a close analogue in operational physics. The primacy of distinction has a distinguished predecessor in Spencer-Brown. The formalisation is routine.
+
+What is claimed is an answer to the question of §1, and only that: \emph{where the primitive is retained difference and readings are finite and rational, a readout of $\zeroQ$ by a positively weighted discrimination operator certifies membership in $\zerog$, the class of fields across which the declared structure retains no difference.} The certification is exact in both directions, and it is exact because of a theorem rather than a definition.
+
+Three things are explicitly not claimed. Not that $\zeroQ$ fails to be a mathematical object; it is a rational, and in a generated tower it is also the ground. Not that this displaces any account of arithmetic zero; §\ref{sec:related} argues it answers a different question from each of them. And not that the operator is faithful absolutely; Example \ref{ex:gap} shows it is faithful relative to the declared structure, which is the strongest form available to a reader with a finite declaration.
+
+The position can be put in one sentence.
+
+\begin{quote}
+\textbf{Arithmetic supplies the symbol $\zeroQ$; the retained-difference theorem determines what a legitimate occurrence of that symbol certifies.}
+\end{quote}
+
+%% ==================================================================
+\section{Conclusion}
+
+An account that takes distinction as primitive faces a question its arithmetic does not answer: what does it mean when the discriminating operator returns nothing? Left unanswered, zero sits in such an account as an anomaly---the one output that is not a record of the primitive, arriving in the same register as those that are.
+
+The answer given here is that a zero readout is not an absence but a classification. It places the field read into a determinate class, and Theorems \ref{thm:edge} and \ref{thm:component} say which: the fields across which the declared structure of comparison retains no difference. The class is relative to that declaration and is not an absolute; the declaration's reach is visible in the class, as Example \ref{ex:gap} shows. And the class is sharply distinct from the reader's inability to decide, which belongs to a different element of the verdict type and admits no such characterisation.
+
+The result closes a gap previously bridged by interpretation. That the operator carries \emph{information} rather than length or energy was a reading, correctly declared as such. At the operator's bottom value that reading is no longer needed: the zero locus and the primitive's failure locus are the same object, provably. What remains interpretive is untouched, and stays where it was.
+
+%% ==================================================================
+\section*{Acknowledgements}
+\small
+The author thanks Walancha Supantarika. This work was conducted under the Open Civil Science Initiative and follows open science principles throughout. Preparation was AI-assisted; the stance, the selection of results, and any errors are the author's.
+
+%% ==================================================================
+\begin{thebibliography}{99}
+\small
+
+\bibitem{benacerraf1965} P.~Benacerraf, ``What numbers could not be,'' \emph{The Philosophical Review}, vol.~74, no.~1, pp.~47--73, 1965.
+
+\bibitem{chung1997} F.~R.~K. Chung, \emph{Spectral Graph Theory}. Providence, RI: American Mathematical Society, 1997.
+
+\bibitem{frege1884} G.~Frege, \emph{Die Grundlagen der Arithmetik}. Breslau: Koebner, 1884.
+
+\bibitem{godsil2001} C.~Godsil and G.~Royle, \emph{Algebraic Graph Theory}. New York: Springer, 2001.
+
+\bibitem{kelley1955} J.~L. Kelley, \emph{General Topology}. New York: Van Nostrand, 1955.
+
+\bibitem{shapiro1997} S.~Shapiro, \emph{Philosophy of Mathematics: Structure and Ontology}. New York: Oxford University Press, 1997.
+
+\bibitem{spencerbrown1969} G.~Spencer-Brown, \emph{Laws of Form}. London: Allen \& Unwin, 1969.
+
+\end{thebibliography}
+
+\end{document}
