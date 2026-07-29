@@ -4,6 +4,7 @@
 *Yaoharee Lahtee* — Open Civil Science Initiative, Pattani, Thailand
 
 [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21665100-blue)](https://doi.org/10.5281/zenodo.21665100)
+[![verify](https://github.com/morrocwi/zero-readout-certifies/actions/workflows/verify.yml/badge.svg)](https://github.com/morrocwi/zero-readout-certifies/actions/workflows/verify.yml)
 [![Coq](https://img.shields.io/badge/Coq-8.18%20%2F%208.20%20·%2017%20results%20·%20axiom--free-informational?logo=coq&logoColor=white)](coq/)
 [![Paper](https://img.shields.io/badge/paper-6%20pages-lightgrey)](paper/)
 [![Code license](https://img.shields.io/badge/code-MIT-green)](LICENSE)
