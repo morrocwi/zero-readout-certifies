@@ -28,7 +28,9 @@ Proof. reflexivity. Qed.
 Example zero_weight_edge_endpoints_differ :
   ~ separates_zero_one 0%nat == separates_zero_one 1%nat.
 Proof.
-  intro H. vm_compute in H.
+  change (~ (0 == 1)).
+  apply Qlt_not_eq.
+  vm_compute.
 Qed.
 
 Definition disconnected_self_loops : list edge :=
@@ -41,5 +43,7 @@ Proof. reflexivity. Qed.
 Example disconnected_values_differ :
   ~ separates_zero_one 0%nat == separates_zero_one 1%nat.
 Proof.
-  intro H. vm_compute in H.
+  change (~ (0 == 1)).
+  apply Qlt_not_eq.
+  vm_compute.
 Qed.
