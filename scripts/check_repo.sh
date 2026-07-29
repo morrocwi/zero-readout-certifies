@@ -1,7 +1,7 @@
 #!/bin/sh
 set -eu
 
-required='README.md REPRODUCE.md CITATION.cff LICENSE LICENSE-TEXT.md LICENSES.md CONTRIBUTING.md SECURITY.md SUPPORT.md CODE_OF_CONDUCT.md codemeta.json .zenodo.json coq/IDM_KeystoneKernel.v coq/Examples.v coq/CheckAssumptions.v paper/main.tex paper/main.tex.part00 paper/main.tex.part01 paper/main.tex.part02 paper/onepager.tex paper/README.md docs/THEOREMS.md docs/SCOPE.md docs/CLAIM_MATRIX.md docs/ARTIFACT_EVALUATION.md'
+required='README.md REPRODUCE.md CITATION.cff LICENSE LICENSE-TEXT.md LICENSES.md CONTRIBUTING.md SECURITY.md SUPPORT.md CODE_OF_CONDUCT.md codemeta.json .zenodo.json coq/IDM_KeystoneKernel.v coq/Examples.v coq/ReaderTwoLevels.v coq/CheckAssumptions.v paper/main.tex paper/main.tex.part00 paper/main.tex.part01 paper/main.tex.part02 paper/reader-two-levels.tex paper/onepager.tex paper/README.md docs/THEOREMS.md docs/SCOPE.md docs/CLAIM_MATRIX.md docs/ARTIFACT_EVALUATION.md docs/PROJECT_CLOSURE.md'
 for path in $required; do
   test -f "$path" || { echo "missing required file: $path" >&2; exit 1; }
 done
