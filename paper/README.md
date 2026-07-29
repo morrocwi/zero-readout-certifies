@@ -1,4 +1,4 @@
-# Paper sources
+# Paper sources and readable copies
 
 `main.tex` is the canonical build entry point for the full paper. It includes three review-sized source units in order:
 
@@ -12,4 +12,6 @@ Build both documents from the repository root:
 make paper
 ```
 
-The build runs the main paper twice with `-halt-on-error` and checks that `onepager.pdf` remains exactly one page when `pdfinfo` is installed. Generated PDFs are release artifacts and are intentionally not treated as source files.
+The build runs the main paper twice with `-halt-on-error` and checks that `onepager.pdf` remains exactly one page when `pdfinfo` is installed.
+
+The LaTeX files are canonical. `main.pdf` and `onepager.pdf` are tracked convenience copies for immediate reading and are refreshed automatically only after the complete verification workflow succeeds on `main`. Tagged releases also publish both PDFs with checksums.
