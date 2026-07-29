@@ -5,7 +5,7 @@
 [![formal verification](https://github.com/morrocwi/zero-readout-certifies/actions/workflows/verify.yml/badge.svg?branch=main)](https://github.com/morrocwi/zero-readout-certifies/actions/workflows/verify.yml)
 [![Rocq 9.2 compatible](https://img.shields.io/badge/Rocq-9.2%20verified-5A3E85)](https://github.com/morrocwi/zero-readout-certifies/actions/workflows/322807319)
 [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21665100-blue)](https://doi.org/10.5281/zenodo.21665100)
-[![Coq](https://img.shields.io/badge/Coq-8.20-compatible-6D4AFF)](https://coq.inria.fr/)
+[![Coq](https://img.shields.io/badge/Coq-8.20%20compatible-6D4AFF)](https://coq.inria.fr/)
 [![code license](https://img.shields.io/badge/code-MIT-green)](LICENSE)
 [![text license](https://img.shields.io/badge/text-CC%20BY%204.0-green)](LICENSE-TEXT.md)
 
