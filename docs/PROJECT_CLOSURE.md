@@ -12,7 +12,8 @@ The frozen scope consists of:
 4. executable witnesses for the nonzero-constant, zero-weight, and disconnected boundaries;
 5. the distinction between arithmetic zero, its zero fibre, an unresolved verdict, and an accumulator's initial process state;
 6. the two compositional levels: accumulation within one reading and sequencing across reading stages;
-7. the explicit fact that the empty-input verdict is determined by a reading contract, not by accumulation alone.
+7. the explicit fact that the empty-input verdict is determined by a reading contract, not by accumulation alone;
+8. the final diagnosis that practical contamination arises from an untagged representation that reuses one value for distinct states, not from arithmetic zero itself.
 
 ## Final claims
 
@@ -20,10 +21,15 @@ The project closes on the following bounded claim:
 
 > For the declared finite rational operator with strictly positive weights, a legitimate zero readout certifies exactly that no difference is retained along the declared comparison structure; equivalently, the field is constant on each connected component.
 
+The associated design conclusion is:
+
+> A successful zero, unresolved failure, and uninitialised process state must not share one untagged representation. The repair is type separation, not removal of arithmetic zero.
+
 The project does **not** claim:
 
 - a new arithmetic definition of zero;
 - that zero is unavoidable in every accumulation architecture;
+- that zero itself causes representation contamination;
 - that an initial accumulator, unresolved failure, and resolved zero are one state;
 - absolute faithfulness beyond the declared graph;
 - graph-theoretic novelty for the kernel theorem;
