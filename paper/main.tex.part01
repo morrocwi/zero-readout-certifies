@@ -1,0 +1,131 @@
+ Theorem \ref{thm:edge} gives equality across every edge; induct on the derivation of $\mathrm{reach}_g(i,j)$, the reflexive case being trivial and a step through an adjacency using the edge equality, after symmetry if the orientation is reversed, composed with the induction hypothesis. ($\Leftarrow$) Every edge makes its endpoints reachable in one step, so the hypothesis yields equality across every edge, and Theorem \ref{thm:edge} applies.
+\end{proof}
+
+Connectedness is nowhere assumed, and the conclusion is accordingly local to components. §\ref{sec:relative} argues that this is not a limitation but the content.
+
+Finally, what licenses speaking of a class rather than merely a set of fields.
+
+\begin{proposition}[The zero locus is a subspace]\label{prop:sub}
+Under strict positivity, $\{\Phi : I_g(\Phi)=0\}$ contains the zero field and is closed under pointwise addition and under scaling by any $c\in\Q$.
+\end{proposition}
+
+\begin{proof}
+By Theorem \ref{thm:edge} each condition reduces to the corresponding closure property of ``$\Phi_i=\Phi_j$ on every edge'', which holds because equality in $\Q$ is preserved by addition and multiplication.
+\end{proof}
+
+\begin{corollary}[Indistinguishability is an equivalence]\label{cor:equiv}
+Define $\Phi\equiv_g\Psi$ to mean $I_g(\Phi-\Psi)=0$. Then $\equiv_g$ is reflexive, symmetric and transitive.
+\end{corollary}
+
+\begin{proof}
+Reflexivity and symmetry follow from Theorem \ref{thm:edge} with the ring structure of $\Q$; transitivity follows by writing $\Phi_i-X_i=(\Phi_i-\Psi_i)+(\Psi_i-X_i)$ edgewise and applying Proposition \ref{prop:sub}.
+\end{proof}
+
+It is worth being exact about what Proposition \ref{prop:sub} is needed for. The set $I_g^{-1}(0)$ is the \emph{fibre} of the readout over zero; the class $[\Phi]_{\equiv_g}$ is the set of fields indistinguishable from $\Phi$. These coincide at $\Phi=0$ trivially, since $\Phi-0=\Phi$. What the proposition supplies is not that coincidence but the \emph{transitivity} of $\equiv_g$: without closure of the zero locus under addition, $\equiv_g$ would not be an equivalence and its ``classes'' would classify nothing.
+
+All results of this section are machine-checked in Coq over the rationals, without \verb|Reals| and without classical axioms; \verb|Print Assumptions| reports \emph{Closed under the global context} on each. The development accompanies this paper as supplementary material and is archived at \href{https://doi.org/10.5281/zenodo.21665100}{doi:10.5281/zenodo.21665100}, with sources at \href{https://github.com/morrocwi/zero-readout-certifies}{github.com/morrocwi/zero-readout-certifies}.
+
+%% ==================================================================
+\section{Two zeros, marked differently}\label{sec:two}
+
+The position is easy to state badly, and stating it badly produces a category mistake that is fatal on inspection. We mark the two objects with different symbols and keep them apart.
+
+\begin{definition}[Arithmetic zero]
+$\zeroQ$ is the rational number zero: an element of the readout's \emph{codomain}, an ordinary member of $\Q$, and---in a setting that generates number from a ground and a successor---also the ground of that generation.
+\end{definition}
+
+\begin{definition}[Retained-distinction zero]
+$\zerog := I_g^{-1}(\{\zeroQ\})$ is the set of fields on which the readout returns $\zeroQ$: an object in the readout's \emph{domain}, and by Corollary \ref{cor:equiv} the $\equiv_g$-class of the zero field.
+\end{definition}
+
+The claim of this paper is \textbf{not} that $\zeroQ$ is an equivalence class. That would confuse a value in the codomain with its fibre in the domain, and would additionally deny $\zeroQ$ a status it plainly has. The claim is:
+
+\begin{quote}
+The foundational content of a readout returning $\zeroQ$ is membership in $\zerog$.
+\end{quote}
+
+Theorems \ref{thm:edge} and \ref{thm:component} are what make $\zerog$ a determinate object rather than a name: they say exactly which fields it contains.
+
+\begin{example}[Zero on a field that is nowhere zero]\label{ex:17}
+Let $\Phi_i=17$ at every vertex of a connected $g$. Then $I_g(\Phi)=\zeroQ$. The field is not empty, no value of it is zero, and nothing about it is absent. What is absent is any difference for the declared structure to retain.
+\end{example}
+
+Example \ref{ex:17} does considerable work. It shows immediately that the zero of a discrimination readout is not the zero of emptiness: the certified content of $I_g(\Phi)=\zeroQ$ is a claim about differences, not about existence, and a fully populated field with a large uniform value satisfies it. Any reading of $\zerog$ as emptiness is thereby unavailable.
+
+\begin{remark}[The ground is untouched]\label{rem:ground}
+In a setting that generates $\N$ from a ground and a successor, $\zeroQ$ also appears as that ground. That occurrence is a constructor, not a reading, and nothing here bears on it. A reading of these theorems on which the number tower becomes incoherent is a misreading, and none is intended or licensed.
+\end{remark}
+
+%% ==================================================================
+\section{Zero is relative to the declared structure}\label{sec:relative}
+
+$\zerog$ carries a subscript, and the subscript is not decoration.
+
+\begin{example}[Zero across a gap in the declared structure]\label{ex:gap}
+Let $g$ have two components $A$ and $B$, with $\Phi=0$ on $A$ and $\Phi=17$ on $B$. Then $I_g(\Phi)=\zeroQ$, although $\Phi$ is not constant.
+\end{example}
+
+Example \ref{ex:gap} looks at first like a defect and is in fact the point. The operator is faithful to distinction \emph{relative to the declared structure of comparison}, not absolutely. Where $g$ supplies no path it supplies no comparison, and the reader was never arranged to tell those vertices apart. That $I_g$ returns $\zeroQ$ there is not a failure of the operator but an accurate report of the reach of the declaration. Any claim of faithfulness below is relative to $g$ and is so qualified.
+
+The general form is straightforward. For a readout $M$ on states write
+\[
+x\sim_M y \iff M(x)=M(y),
+\qquad
+\mathbf{0}_M := M^{-1}(\{\zeroQ\}),
+\]
+and when $M$ is linear, $\mathbf{0}_M=\ker M$. Zero relative to $M$ is the class of states $M$ does not separate.
+
+One clarification is needed, and it marks the point at which a superficially similar formulation would be wrong. It is tempting to say that states in $\mathbf{0}_M$ ``differ in themselves though $M$ cannot see it''. Under the reading contract of §2 that is not available: a difference outside the range of every admissible reading is not something the setting can assert. What may be asserted is only that $M$ does not separate them, at the resolution declared, with no claim either way about some other reading. The relativity is not a hedge added for safety; it is the reading contract applied at the kernel, and Example \ref{ex:gap} is what it looks like in practice.
+
+%% ==================================================================
+\section{Zero and refusal are different absences}\label{sec:refusal}
+
+A second object is easily mistaken for zero, and conflating them is a substantive error rather than a terminological one.
+
+Recall the verdict type of §2. Besides the signed values and zero it carries a least element $\bot$ for the case in which the reader, at its declared resolution, determines nothing. The two absences differ in kind:
+
+\begin{center}
+\begin{tabular}{@{}ll@{}}
+\toprule
+$\zeroQ$ & a fact about the states: no difference is retained \\
+$\bot$ & a fact about the reader: it cannot tell \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Theorems \ref{thm:edge} and \ref{thm:component} are statements about the first, and they are biconditionals precisely because the first is determinate. A determinate absence is exactly what an equivalence class can record. No corresponding biconditional is available for $\bot$: it reports nothing about the field, and therefore characterises no set of fields. This asymmetry is not an incidental feature of the present operator but a consequence of what the two absences are about.
+
+The distinction has a consequence outside philosophy, worth stating because it shows the two are not interchangeable in practice. A spurious zero---an uninitialised accumulator, a default return, an exception swallowed into a zero---is indistinguishable at the point of use from a legitimate small result, and by Theorem \ref{thm:edge} it asserts something false and specific: that no difference is retained. A spurious refusal is loud. A system that returns a value on its refusal branch converts the second failure into the first, which is why the separation belongs in the type rather than in a convention.
+
+%% ==================================================================
+\section{Position in the setting}\label{sec:position}
+
+The results above are not an addition beside the commitments of §2 but a join inside them.
+
+\begin{center}
+\small
+\begin{tabular}{@{}p{0.27\linewidth}p{0.65\linewidth}@{}}
+\toprule
+\textbf{commitment} & \textbf{what the kernel supplies} \\
+\midrule
+the primitive: retained difference & the zero locus of the operator \emph{is} the locus where the primitive retains nothing (Thms.~\ref{thm:edge}--\ref{thm:component}) \\[3pt]
+generated number & separates the ground $\zeroQ$ of the generation from the $\zeroQ$ a reading returns (Rem.~\ref{rem:ground}) \\[3pt]
+the reading contract & $\mathbf{0}_M$ is that contract applied at the kernel; no difference is posited outside a reading (§\ref{sec:relative}) \\[3pt]
+the verdict type & determinate zero admits a biconditional; the unresolved element does not (§\ref{sec:refusal}) \\[3pt]
+the comparison operator & \eqref{eq:I} says what $I_g$ is; the theorems say what $I_g^{-1}(\zeroQ)$ is \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The first row is the one that changes something. Before it, the primitive and the operator were connected by interpretation only---the reading that what $L_R$ carries is information rather than length or energy. That reading was an interpretation and could only be declared as such, because nothing derived it. Theorem \ref{thm:component} derives one half: at its bottom value the operator is exactly the failure of the primitive, so no interpretive step is needed to say what $I_g=\zeroQ$ means. What remains interpretive---that the nonzero values measure \emph{information} rather than some other quantity monotone in retained difference---is untouched and stays where it was.
+
+%% ==================================================================
+\section{Relation to neighbouring positions}\label{sec:related}
+
+Each of the following contains part of what is said above. We state in each case what is borrowed and where the account departs.
+
+\subsection{Frege}
+Frege explains number through equinumerosity and obtains zero as the number belonging to a concept under which nothing falls \cite{frege1884}. The resemblance is real: zero is associated with a class. The departure is twofold. Frege begins from sameness of number, the present account from retained difference. And Fregean zero arises from \emph{empty} cardinality, whereas $\zerog$ routinely contains fields that are fully populated with large values---Example \ref{ex:17} is the counterexample to any reading of $\zerog$ as emptiness. Frege's zero is also an object of arithmetic, which $\zeroQ$ remains here. The accounts are not in competition because they answer different questions.
+
+\subsection{Structuralism}
+Structuralism holds that numbers are positions in a pattern rather than objects with intrinsic natures \cite{benacerraf1965,shapiro1997}. It is sometimes offered in support of claims that zero ``is not really an object''. It cannot support the present position, for a simple reason: structuralism says the same of every number. It answers ``what is zero within the number structure?''; the question here is ``what does a zero-valued reading certify about the states read?''. A structuralist may accept the answer given here wi
