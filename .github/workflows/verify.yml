@@ -1,0 +1,45 @@
+name: verify
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  coq:
+    name: Coq ${{ matrix.coq }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        coq: ['8.18', '8.20']
+    container:
+      image: "coqorg/coq:${{ matrix.coq }}"
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compile the development
+        run: |
+          cd coq
+          coqc -q IDM_KeystoneKernel.v
+
+      - name: Check the assumption set
+        run: |
+          cd coq
+          coqc -q -I . CheckAssumptions.v | tee assumptions.txt
+
+      - name: Fail if any theorem depends on an axiom
+        run: |
+          cd coq
+          if grep -qi "axiom" assumptions.txt; then
+            echo "::error::a theorem depends on an axiom"
+            cat assumptions.txt
+            exit 1
+          fi
+          count=$(grep -c "Closed under the global context" assumptions.txt)
+          if [ "$count" -ne 5 ]; then
+            echo "::error::expected 5 axiom-free reports, got $count"
+            cat assumptions.txt
+            exit 1
+          fi
+          echo "all five checked results are axiom-free"
