@@ -1,23 +1,30 @@
-COQ      ?= coqc
-COQTOP   ?= coqtop
-LATEX    ?= pdflatex
+SHELL := /bin/sh
 
-.PHONY: all verify paper clean
+COQC   ?= coqc
+LATEX  ?= pdflatex
 
-all: verify
+.PHONY: all verify paper audit check clean
 
-## Compile the development and print the assumption set of each main theorem.
+all: check
+
 verify:
-	@cd coq && $(COQ) -q IDM_KeystoneKernel.v
-	@cd coq && $(COQ) -q -I . CheckAssumptions.v
+	@COQC='$(COQC)' sh scripts/check_assumptions.sh
 
-## Build both PDFs from source.
 paper:
-	@cd paper && $(LATEX) -interaction=nonstopmode main.tex >/dev/null
-	@cd paper && $(LATEX) -interaction=nonstopmode main.tex >/dev/null
-	@cd paper && $(LATEX) -interaction=nonstopmode onepager.tex >/dev/null
+	@cd paper && $(LATEX) -halt-on-error -file-line-error -interaction=nonstopmode main.tex >/dev/null
+	@cd paper && $(LATEX) -halt-on-error -file-line-error -interaction=nonstopmode main.tex >/dev/null
+	@cd paper && $(LATEX) -halt-on-error -file-line-error -interaction=nonstopmode onepager.tex >/dev/null
+	@if command -v pdfinfo >/dev/null 2>&1; then \
+		test "$$(pdfinfo paper/onepager.pdf | awk '/^Pages:/ {print $$2}')" = "1"; \
+	fi
+	@rm -f paper/*.aux paper/*.log paper/*.out
 	@echo "built paper/main.pdf and paper/onepager.pdf"
+
+audit:
+	@sh scripts/check_repo.sh
+
+check: verify paper audit
 
 clean:
 	@rm -f coq/*.vo coq/*.vok coq/*.vos coq/*.glob coq/.*.aux
-	@rm -f paper/*.aux paper/*.log paper/*.out
+	@rm -f paper/*.aux paper/*.log paper/*.out paper/*.pdf

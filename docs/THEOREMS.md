@@ -1,70 +1,61 @@
-# Index of results
+# Formal result index
 
-Every named result in `coq/IDM_KeystoneKernel.v`, in dependency order, with the
-role it plays. Seventeen results in total; the two marked **main** are what the
-paper rests on.
+`coq/IDM_KeystoneKernel.v` contains 17 named mathematical results. `coq/Examples.v` adds five executable witnesses that exercise the principal boundary cases.
 
-## Definitions
+## Core definitions
 
-| name | meaning |
+| Name | Meaning |
 |---|---|
-| `edge` | a triple `(i, j, w)` in `nat × nat × Q` |
-| `Phi` | a field: `nat -> Q` |
-| `I_edge` | `w · (Φᵢ − Φⱼ)²` — the retained information of one edge |
-| `I_form` | the fold of `I_edge` over the edge list |
-| `adj` | some edge joins `i` and `j`, in either orientation |
-| `reach` | reflexive–transitive closure of `adj`, defined inductively |
-| `Fzero`, `Fadd`, `Fscale`, `Fsub` | pointwise operations on fields |
-| `indist` | `I_form (Fsub a b) g == 0` — indistinguishability under the readout |
+| `edge` | `(i,j,w)` with natural endpoints and rational weight |
+| `Phi` | rational-valued field on natural-numbered vertices |
+| `I_edge` | `w * (phi i - phi j)^2` |
+| `I_form` | finite sum of edge contributions |
+| `adj`, `reach` | undirected adjacency and reflexive-transitive reachability |
+| `Fzero`, `Fadd`, `Fscale`, `Fsub` | pointwise field operations |
+| `indist` | zero readout of a field difference |
 
-## Arithmetic groundwork over ℚ
+## Arithmetic lemmas
 
-| result | statement | why it is needed |
-|---|---|---|
-| `Qsq_nonneg` | `0 ≤ x · x` | every edge term is nonnegative |
-| `Qadd_nonneg` | nonnegatives sum to a nonnegative | the fold stays nonnegative |
-| `Qsq_zero` | `x · x == 0 → x == 0` | ℚ is an integral domain; the disjunction collapses |
-| `Qplus_nonneg_eq0` | `a,b ≥ 0` and `a + b == 0` → both vanish | splits a vanishing sum at the head |
-
-## Edge level
-
-| result | statement |
+| Result | Role |
 |---|---|
-| `I_edge_nonneg` | with `w ≥ 0`, the edge term is nonnegative |
-| `I_edge_zero_iff` | with `w > 0`, the edge term vanishes **iff** `Φᵢ = Φⱼ` |
+| `Qsq_nonneg` | squares are nonnegative over `Q` |
+| `Qadd_nonneg` | sums preserve nonnegativity |
+| `Qsq_zero` | a rational square vanishes only at zero |
+| `Qplus_nonneg_eq0` | a vanishing sum of two nonnegatives splits termwise |
 
-`I_edge_zero_iff` is the single point at which strict positivity is spent.
+## Edge and graph results
 
-## Graph level
-
-| result | statement |
+| Result | Role |
 |---|---|
-| `I_form_zero_forall` | with all `w ≥ 0`, a vanishing total forces every edge term to vanish |
-| **`keystone_zero_iff_edge`** | **main** — with all `w > 0`: `I_form Φ g == 0` **iff** `Φᵢ = Φⱼ` on every edge |
-| `edge_gives_reach` | an edge makes its endpoints reachable in one step |
-| **`keystone_zero_iff_component`** | **main** — with all `w > 0`: `I_form Φ g == 0` **iff** `Φᵢ = Φⱼ` whenever `reach g i j` |
+| `I_edge_nonneg` | each nonnegative-weight edge term is nonnegative |
+| `I_edge_zero_iff` | positive-weight edge term vanishes iff endpoints agree |
+| `I_form_zero_forall` | a zero sum forces every edge term to vanish |
+| `keystone_zero_iff_edge` | main edgewise biconditional |
+| `edge_gives_reach` | an edge produces a reachability witness |
+| `keystone_zero_iff_component` | main connected-component biconditional |
 
-## The zero locus classifies
+## Zero-locus structure
 
-These are what license speaking of an equivalence *class* rather than a fibre.
-Without closure under addition, `indist` would fail transitivity and the zero
-locus would classify nothing.
-
-| result | statement |
+| Result | Role |
 |---|---|
-| `I_form_ext` | `I_form` depends on the field only up to pointwise equality |
-| `kernel_zero` | the zero field lies in the zero locus |
-| `kernel_add` | the zero locus is closed under pointwise addition |
-| `kernel_scale` | the zero locus is closed under scaling by any `c : Q` |
-| `indist_refl` | `indist` is reflexive |
-| `indist_sym` | `indist` is symmetric |
-| `indist_trans` | `indist` is transitive |
+| `I_form_ext` | extensionality under pointwise field equality |
+| `kernel_zero` | zero field belongs to the zero locus |
+| `kernel_add` | closure under addition |
+| `kernel_scale` | closure under rational scaling |
+| `indist_refl` | reflexivity |
+| `indist_sym` | symmetry |
+| `indist_trans` | transitivity |
 
-## Assumption set
+## Executable witnesses
 
-`coq/CheckAssumptions.v` reports the dependency set of five results: the two
-main theorems, plus `kernel_add`, `kernel_scale` and `indist_trans`. All five
-return *Closed under the global context*: no `Reals`, no `classic`, no
-`functional_extensionality`, no admitted lemma.
+| Result | What it demonstrates |
+|---|---|
+| `constant_nonzero_has_zero_readout` | zero readout does not imply pointwise-zero values |
+| `zero_weight_edge_has_zero_readout` | a zero-weight edge contributes zero |
+| `zero_weight_edge_endpoints_differ` | that edge can connect unequal endpoint values |
+| `disconnected_readout_zero` | disconnected self-loop components can yield zero |
+| `disconnected_values_differ` | zero does not imply global constancy across components |
 
-Verify with `make verify`, or by hand as described in `REPRODUCE.md`.
+## Assumption audit
+
+`coq/CheckAssumptions.v` names every audited result explicitly. The verification script derives the expected report count from that file and fails if the count differs or if an `Axioms:` block appears.
