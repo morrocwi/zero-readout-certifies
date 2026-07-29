@@ -9,3 +9,5 @@
 *.synctex.gz
 coq/assumptions.txt
 paper/*.pdf
+!paper/main.pdf
+!paper/onepager.pdf
