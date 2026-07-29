@@ -1,0 +1,84 @@
+name: release
+
+on:
+  workflow_run:
+    workflows: [verify]
+    types: [completed]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.head_branch == 'main' &&
+      github.repository == 'morrocwi/zero-readout-certifies'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+          fetch-depth: 0
+
+      - name: Install LaTeX
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            texlive-latex-base \
+            texlive-latex-extra \
+            texlive-fonts-recommended
+
+      - name: Reassemble the main paper source
+        run: |
+          cat paper/main.tex.part00 paper/main.tex.part01 paper/main.tex.part02 > paper/main.tex
+
+      - name: Verify source reconstruction
+        run: |
+          test "$(sha256sum paper/main.tex | cut -d' ' -f1)" = "$(sha256sum <(cat paper/main.tex.part00 paper/main.tex.part01 paper/main.tex.part02) | cut -d' ' -f1)"
+
+      - name: Build the paper PDFs
+        run: make paper
+
+      - name: Commit generated PDFs to main
+        env:
+          SOURCE_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f paper/main.tex paper/main.pdf paper/onepager.pdf
+          git rm -f paper/main.tex.part00 paper/main.tex.part01 paper/main.tex.part02
+          if git diff --cached --quiet; then
+            echo "PDFs already match the sources"
+          else
+            git commit -m "Build paper PDFs from verified sources"
+            git push origin HEAD:main
+          fi
+          echo "RELEASE_SHA=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+
+      - name: Create v1.0.0 after verification
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view v1.0.0 >/dev/null 2>&1; then
+            echo "v1.0.0 already exists; nothing to do"
+            exit 0
+          fi
+
+          cat > /tmp/release-notes.md <<'NOTES'
+          First public release of *What a Zero Readout Certifies*.
+
+          Verification completed under Coq 8.18 and Coq 8.20. The CI fails if
+          any checked theorem reports an axiom or if the five expected
+          `Closed under the global context` reports are not present.
+
+          The attached PDFs were compiled by GitHub Actions from the committed
+          LaTeX sources after the formal verification succeeded.
+          NOTES
+
+          gh release create v1.0.0 \
+            --target "$RELEASE_SHA" \
+            --title "v1.0.0 — What a Zero Readout Certifies" \
+            --notes-file /tmp/release-notes.md \
+            'paper/main.pdf#Main paper (PDF)' \
+            'paper/onepager.pdf#One-page summary (PDF)'
