@@ -22,6 +22,8 @@ $COQC -q IDM_KeystoneKernel.v
 # shellcheck disable=SC2086
 $COQC -q Examples.v
 # shellcheck disable=SC2086
+$COQC -q ReaderTwoLevels.v
+# shellcheck disable=SC2086
 $COQC -q CheckAssumptions.v | tee assumptions.txt
 
 expected=$(grep -c '^[[:space:]]*Print Assumptions ' CheckAssumptions.v)

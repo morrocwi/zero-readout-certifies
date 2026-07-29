@@ -10,11 +10,25 @@ This document states the boundaries separately so they can be reviewed before th
 
 **Nonnegativity suffices for termwise vanishing.** `I_form_zero_forall` assumes only `w >= 0`, weaker than the main theorems. Strict positivity is spent only when a zero edge contribution is converted into equality of endpoint values.
 
+## Reader-state boundary
+
+The formal appendix distinguishes three different kinds of state:
+
+- an accumulator that has not yet received an input;
+- an unresolved or failed reading;
+- a resolved quantitative result, including resolved zero.
+
+Within-reading accumulation and between-stage pipeline sequencing are different operations. A boundary element may be neutral for one operation and absorbing for another without algebraic contradiction. That fact alone does not identify the states semantically, so the typed refinement uses distinct constructors.
+
+The verdict for an empty traversal is contract-dependent. A total contract may return resolved zero; a strict contract may return unresolved. Therefore the project does not infer that accumulation by itself forces arithmetic zero.
+
 ## What is not claimed
 
 - **No novelty against spectral graph theory.** Over the reals, it is standard that Dirichlet energy vanishes exactly for functions constant on connected components. The mathematical kernel fact is prior art.
 - **No priority over quotient mathematics.** The subspace and equivalence results instantiate standard zero-kernel and pseudometric-quotient constructions.
 - **No ontological redefinition of arithmetic zero.** `0_Q` remains a rational number. The claim concerns what a zero-valued output from this declared operator certifies.
+- **No universal zero requirement for accumulation.** Zero appears in the empty case only after a declared finalisation contract maps that process state into the quantitative codomain.
+- **No identification of initial, unresolved, and zero states.** They are kept separate in the typed formal model.
 - **No absolute faithfulness.** The operator distinguishes only along paths supplied by the declared graph.
 - **No machine-checked novelty or philosophy.** The prover checks mathematical statements, not literature completeness or interpretive adequacy.
 
@@ -29,6 +43,7 @@ The paper compares the result at the level of the standard general theorem rathe
 3. Prior work that already states the same kernel characterization in substantially the same retained-difference or faithfulness role.
 4. A demonstration that the interpretive conclusion is stronger than the biconditionals warrant.
 5. A reproduction failure under a supported prover version that cannot be explained by documented environmental differences.
+6. A hidden conversion of an initial or failed process state into a legitimate zero verdict without an explicit finalisation contract.
 
 The likely scholarly pressure point is item 3 or 4, not the elementary kernel mathematics. The repository is structured to make those objections easy to state precisely rather than difficult to discover.
 
