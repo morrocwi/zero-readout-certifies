@@ -18,6 +18,8 @@ Over the reals it is standard that the Dirichlet energy of a function on a weigh
 
 What is offered differs in kind from a new graph-theoretic fact: the placement of a known kernel result as a \emph{faithfulness condition} on a distinction-based account---the demonstration that the operator's zero locus and the primitive's failure locus coincide in both directions, over $\Q$, with the required hypothesis made explicit, and checked without classical axioms.
 
+\input{reader-two-levels}
+
 %% ==================================================================
 \section{What is claimed}\label{sec:claimed}
 
@@ -27,7 +29,7 @@ The mathematics of §\ref{sec:kernel} is elementary and is classical over $\R$. 
 
 What is claimed is an answer to the question of §1, and only that: \emph{where the primitive is retained difference and readings are finite and rational, a readout of $\zeroQ$ by a positively weighted discrimination operator certifies membership in $\zerog$, the class of fields across which the declared structure retains no difference.} The certification is exact in both directions, and it is exact because of a theorem rather than a definition.
 
-Three things are explicitly not claimed. Not that $\zeroQ$ fails to be a mathematical object; it is a rational, and in a generated tower it is also the ground. Not that this displaces any account of arithmetic zero; §\ref{sec:related} argues it answers a different question from each of them. And not that the operator is faithful absolutely; Example \ref{ex:gap} shows it is faithful relative to the declared structure, which is the strongest form available to a reader with a finite declaration.
+Four things are explicitly not claimed. Not that $\zeroQ$ fails to be a mathematical object; it is a rational, and in a generated tower it is also the ground. Not that this displaces any account of arithmetic zero; §\ref{sec:related} argues it answers a different question from each of them. Not that the operator is faithful absolutely; Example \ref{ex:gap} shows it is faithful relative to the declared structure, which is the strongest form available to a reader with a finite declaration. And not that every form of accumulation must begin from arithmetic zero; §\ref{sec:two-levels} shows that the empty case depends on the process type and the finalisation contract.
 
 The position can be put in one sentence.
 
@@ -40,9 +42,11 @@ The position can be put in one sentence.
 
 An account that takes distinction as primitive faces a question its arithmetic does not answer: what does it mean when the discriminating operator returns nothing? Left unanswered, zero sits in such an account as an anomaly---the one output that is not a record of the primitive, arriving in the same register as those that are.
 
-The answer given here is that a zero readout is not an absence but a classification. It places the field read into a determinate class, and Theorems \ref{thm:edge} and \ref{thm:component} say which: the fields across which the declared structure of comparison retains no difference. The class is relative to that declaration and is not an absolute; the declaration's reach is visible in the class, as Example \ref{ex:gap} shows. And the class is sharply distinct from the reader's inability to decide, which belongs to a different element of the verdict type and admits no such characterisation.
+The answer given here is that a legitimate zero readout is not an absence but a classification. It places the field read into a determinate class, and Theorems \ref{thm:edge} and \ref{thm:component} say which: the fields across which the declared structure of comparison retains no difference. The class is relative to that declaration and is not an absolute; the declaration's reach is visible in the class, as Example \ref{ex:gap} shows. And the class is sharply distinct both from the reader's inability to decide and from the accumulator's not-yet-started process state.
 
-The result closes a gap previously bridged by interpretation. That the operator carries \emph{information} rather than length or energy was a reading, correctly declared as such. At the operator's bottom value that reading is no longer needed: the zero locus and the primitive's failure locus are the same object, provably. What remains interpretive is untouched, and stays where it was.
+The two-level analysis closes the remaining implementation gap. Accumulation within one reading and sequencing across reading stages are different operations, so their boundary elements need not have the same algebraic role. More importantly, an initial accumulator, an unresolved verdict, and a resolved zero are different typed states. Whether an empty traversal finalises as zero or refusal is fixed by the reading contract. Once zero is legitimately returned, however, the kernel theorem determines its content exactly.
+
+The result therefore closes a gap previously bridged by interpretation without claiming that zero is unavoidable in every computational architecture. At the operator's bottom value the zero locus and the primitive's failure locus coincide, provably. What remains interpretive---that the nonzero values measure \emph{information} rather than some other quantity monotone in retained difference---is untouched and stays where it was.
 
 %% ==================================================================
 \section*{Acknowledgements}
