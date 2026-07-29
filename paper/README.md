@@ -4,7 +4,9 @@
 
 1. `main.tex.part00` — front matter, setting, and kernel development;
 2. `main.tex.part01` — zero fibre, relativity, refusal, and positioning;
-3. `main.tex.part02` — related work, claim boundary, conclusion, and references.
+3. `main.tex.part02` — related work, the two-level reader section, claim boundary, conclusion, and references.
+
+`reader-two-levels.tex` is included from the third unit. It isolates the final clarification about accumulator state, unresolved verdicts, within-reading accumulation, pipeline sequencing, and contract-dependent finalisation.
 
 Build both documents from the repository root:
 
