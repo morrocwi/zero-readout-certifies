@@ -12,7 +12,10 @@ Example constant_nonzero_has_zero_readout :
 Proof.
   intro g. induction g as [| e es IH].
   - reflexivity.
-  - destruct e as [[i j] w]. simpl. rewrite IH. ring.
+  - destruct e as [[i j] w]. simpl.
+    setoid_replace (I_edge constant_seventeen (i, j, w)) with 0.
+    + rewrite Qplus_0_l. exact IH.
+    + unfold I_edge, constant_seventeen. ring.
 Qed.
 
 Definition separates_zero_one : Phi :=
