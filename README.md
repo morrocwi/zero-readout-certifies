@@ -36,6 +36,7 @@ This repository makes a deliberately narrow contribution:
 - **Standard mathematics:** the kernel characterization is familiar from Dirichlet energy and graph Laplacians.
 - **Formal contribution:** the exact hypotheses, both directions, subspace closure, equivalence relation, boundary examples, and reader-state separation are machine checked over `Q`.
 - **Interpretive contribution:** for this declared comparison operator, a legitimate zero readout classifies states that the operator does not distinguish.
+- **Type-design diagnosis:** the contamination problem is not a defect of zero. It arises when one untagged value is reused for a successful zero, unresolved failure, and an uninitialised process state. A sum type removes the ambiguity while keeping arithmetic zero intact, and the difference is visible in pipeline behaviour.
 - **Final qualification:** accumulation within one reading and sequencing across reading stages are different operations; an initial accumulator, unresolved failure, and resolved zero are distinct typed states. The empty-input verdict depends on the declared finalisation contract.
 - **Not claimed:** a new arithmetic definition of zero, that every accumulator must begin from zero, absolute indistinguishability, or novelty over spectral graph theory.
 
@@ -88,7 +89,7 @@ See [`REPRODUCE.md`](REPRODUCE.md) for exact commands and the limits of what com
 | [`docs/PROJECT_CLOSURE.md`](docs/PROJECT_CLOSURE.md) | Frozen scope and maintenance policy |
 | [`docs/ARTIFACT_EVALUATION.md`](docs/ARTIFACT_EVALUATION.md) | Reviewer-oriented evaluation protocol |
 | [`paper/main.tex`](paper/main.tex) | Canonical full-paper build entry point |
-| [`paper/reader-two-levels.tex`](paper/reader-two-levels.tex) | Final section on internal traversal and two compositional levels |
+| [`paper/reader-two-levels.tex`](paper/reader-two-levels.tex) | Final section on internal traversal, two compositional levels, and the type-contamination diagnosis |
 | [`paper/main.pdf`](paper/main.pdf) | CI-built convenience copy of the full paper |
 | [`paper/onepager.tex`](paper/onepager.tex) | One-page technical summary source |
 | [`paper/onepager.pdf`](paper/onepager.pdf) | CI-built convenience copy of the one-page summary |
