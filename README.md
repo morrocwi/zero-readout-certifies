@@ -34,11 +34,18 @@ The result is proved over the rationals. The audited theorems compile under Coq 
 This repository makes a deliberately narrow contribution:
 
 - **Standard mathematics:** the kernel characterization is familiar from Dirichlet energy and graph Laplacians.
-- **Formal contribution:** the exact hypotheses, both directions, subspace closure, equivalence relation, and boundary examples are machine checked over `Q`.
-- **Interpretive contribution:** for this declared comparison operator, a zero readout classifies states that the operator does not distinguish.
-- **Not claimed:** a new arithmetic definition of zero, absolute indistinguishability, or novelty over spectral graph theory.
+- **Formal contribution:** the exact hypotheses, both directions, subspace closure, equivalence relation, boundary examples, and reader-state separation are machine checked over `Q`.
+- **Interpretive contribution:** for this declared comparison operator, a legitimate zero readout classifies states that the operator does not distinguish.
+- **Final qualification:** accumulation within one reading and sequencing across reading stages are different operations; an initial accumulator, unresolved failure, and resolved zero are distinct typed states. The empty-input verdict depends on the declared finalisation contract.
+- **Not claimed:** a new arithmetic definition of zero, that every accumulator must begin from zero, absolute indistinguishability, or novelty over spectral graph theory.
 
 The precise mapping from prose claims to formal results is in [`docs/CLAIM_MATRIX.md`](docs/CLAIM_MATRIX.md). Limitations and falsifiers are in [`docs/SCOPE.md`](docs/SCOPE.md).
+
+## Project status
+
+The formal and interpretive scope is frozen after the two-level reader closure. Future changes are limited to error corrections, reproducibility fixes, compatibility maintenance, and prior-art updates. See [`docs/PROJECT_CLOSURE.md`](docs/PROJECT_CLOSURE.md).
+
+The one intentionally open question is `N1`: whether the placement of the standard kernel theorem as a faithfulness condition is novel. That is a scholarly prior-art question, not a machine-checkable theorem.
 
 ## Verify in under a minute
 
@@ -74,11 +81,14 @@ See [`REPRODUCE.md`](REPRODUCE.md) for exact commands and the limits of what com
 |---|---|
 | [`coq/IDM_KeystoneKernel.v`](coq/IDM_KeystoneKernel.v) | Core definitions and 17 named mathematical results |
 | [`coq/Examples.v`](coq/Examples.v) | Executable witnesses for the nonzero-constant, zero-weight, and disconnected cases |
+| [`coq/ReaderTwoLevels.v`](coq/ReaderTwoLevels.v) | Formal appendix on one-operation collapse, two-operation compatibility, typed reader states, and contract-dependent finalisation |
 | [`coq/CheckAssumptions.v`](coq/CheckAssumptions.v) | Audited theorem list |
 | [`docs/THEOREMS.md`](docs/THEOREMS.md) | Result index and dependency roles |
 | [`docs/CLAIM_MATRIX.md`](docs/CLAIM_MATRIX.md) | Informal claim to theorem correspondence |
+| [`docs/PROJECT_CLOSURE.md`](docs/PROJECT_CLOSURE.md) | Frozen scope and maintenance policy |
 | [`docs/ARTIFACT_EVALUATION.md`](docs/ARTIFACT_EVALUATION.md) | Reviewer-oriented evaluation protocol |
 | [`paper/main.tex`](paper/main.tex) | Canonical full-paper build entry point |
+| [`paper/reader-two-levels.tex`](paper/reader-two-levels.tex) | Final section on internal traversal and two compositional levels |
 | [`paper/main.pdf`](paper/main.pdf) | CI-built convenience copy of the full paper |
 | [`paper/onepager.tex`](paper/onepager.tex) | One-page technical summary source |
 | [`paper/onepager.pdf`](paper/onepager.pdf) | CI-built convenience copy of the one-page summary |
