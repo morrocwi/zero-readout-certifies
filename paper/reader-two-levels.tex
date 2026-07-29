@@ -3,29 +3,19 @@
 
 Equation \eqref{eq:I} is an extensional presentation of a finite reading. It need not be understood as a view from nowhere in which the whole graph is simultaneously present to an external collector. An internal reader may traverse the declared finite edge list one edge at a time, obtain the corresponding contribution, and update a finite accumulator. The list representation supplies an implementation order; the theorem concerns the value delivered by the declared finite computation, not an epistemic privilege attached to that order.
 
-This raises a genuine typing question. Three states are easily collapsed in prose:
-\[
-\iota\quad\text{(the accumulator has received no input)},
-\qquad
-\bot\quad\text{(a reading failed to resolve)},
-\qquad
-\mathrm{Resolved}(\zeroQ)\quad\text{(a reading succeeded and retained no difference)}.
-\]
-They are not interchangeable. The first is a process state, the second a failure verdict, and the third a determinate quantitative verdict.
+This raises a genuine typing question. Three states are easily collapsed in prose, but they must remain distinct:
 
-The algebraic source of the confusion is now machine-checked in \verb|ReaderTwoLevels.v|. For one operation, if a single element is both a two-sided identity and a two-sided absorber, every two carrier elements are equal. But the restriction is explicitly \emph{for one operation}. A finite reader performs at least two different compositions:
+\paragraph{Initial state $\iota$.} The accumulator has received no input. This is a process state, not a quantitative verdict.
 
-\begin{center}
-\small
-\begin{tabular}{@{}p{0.22\linewidth}p{0.40\linewidth}p{0.27\linewidth}@{}}
-\toprule
-operation & level & boundary behaviour \\
-\midrule
-accumulation & combine contributions within one reading & an initial state is neutral \\
-pipeline sequencing & compose completed reading stages & an unresolved stage is absorbing \\
-\bottomrule
-\end{tabular}
-\end{center}
+\paragraph{Unresolved verdict $\bot$.} A reading was attempted but failed to resolve. This is a failure verdict, not a number.
+
+\paragraph{Resolved zero $\mathrm{Resolved}(\zeroQ)$.} The reading succeeded and retained no difference. This is a determinate quantitative verdict.
+
+The algebraic source of the confusion is now machine-checked in \verb|ReaderTwoLevels.v|. For one operation, if a single element is both a two-sided identity and a two-sided absorber, every two carrier elements are equal. But the restriction is explicitly \emph{for one operation}. A finite reader performs at least two different compositions.
+
+\paragraph{Accumulation.} Within one reading, contributions are combined across the traversed edges. An initial process state is neutral for this operation.
+
+\paragraph{Pipeline sequencing.} Across completed reading stages, an unresolved stage is absorbing: failure at one stage prevents the pipeline from reporting a resolved result.
 
 A common carrier element can therefore be neutral for the first operation and absorbing for the second without collapse; the formal file provides an explicit witness. That witness establishes algebraic compatibility only. It does not by itself show that ``no accumulated contribution yet'' and ``the reader failed'' have the same meaning. The typed refinement keeps them separate: \verb|Init| is the unit of accumulation, \verb|AccFailed| is absorbing within a failed accumulation, and \verb|Unresolved| is absorbing under pipeline sequencing. A resolved zero remains a different constructor and behaves differently: it allows a later resolved stage to proceed, whereas an unresolved verdict stops the pipeline.
 
