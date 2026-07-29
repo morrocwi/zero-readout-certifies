@@ -1,65 +1,48 @@
 # What a Zero Readout Certifies
 
-**Zero as the failure locus of retained distinction.**
-*Yaoharee Lahtee* — Open Civil Science Initiative, Pattani, Thailand
+**A machine-checked characterization of the zero fibre of a finite retained-difference operator.**
 
+[![formal verification](https://github.com/morrocwi/zero-readout-certifies/actions/workflows/verify.yml/badge.svg)](https://github.com/morrocwi/zero-readout-certifies/actions/workflows/verify.yml)
 [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21665100-blue)](https://doi.org/10.5281/zenodo.21665100)
-[![verify](https://github.com/morrocwi/zero-readout-certifies/actions/workflows/verify.yml/badge.svg)](https://github.com/morrocwi/zero-readout-certifies/actions/workflows/verify.yml)
-[![Coq](https://img.shields.io/badge/Coq-8.18%20%2F%208.20%20·%2017%20results%20·%20axiom--free-informational?logo=coq&logoColor=white)](coq/)
-[![Paper](https://img.shields.io/badge/paper-6%20pages-lightgrey)](paper/)
-[![Code license](https://img.shields.io/badge/code-MIT-green)](LICENSE)
-[![Text license](https://img.shields.io/badge/text-CC%20BY%204.0-green)](LICENSE-TEXT.md)
+[![Rocq](https://img.shields.io/badge/Rocq-9.2-5A3E85)](https://rocq-prover.org/)
+[![Coq](https://img.shields.io/badge/Coq-8.20-compatible-6D4AFF)](https://coq.inria.fr/)
+[![code license](https://img.shields.io/badge/code-MIT-green)](LICENSE)
+[![text license](https://img.shields.io/badge/text-CC%20BY%204.0-green)](LICENSE-TEXT.md)
 
----
+## Result
 
-Arithmetic supplies the symbol `0`. It does not, by itself, say what a measurement returning that symbol has established.
+For a finite weighted comparison graph `g` and a rational-valued field `Phi`, define
 
-This repository contains a theorem answering that question, its complete machine-checked proof, and a paper arguing what the theorem does and does not license.
-
-## The result in one screen
-
-For a finite weighted graph `g` — a *declared structure of comparison* — and a field `Φ` assigning a rational to each vertex, the **retained information** of `Φ` is
-
-```
-I_g(Φ)  =  Σ_{(i,j,w) ∈ g}  w · (Φᵢ − Φⱼ)²   =   Φᵀ L_R Φ,     L_R = D_W − W
+```text
+I_g(Phi) = sum_(i,j,w in g) w (Phi_i - Phi_j)^2.
 ```
 
-> **Theorem.** If every weight of `g` is **strictly positive**, then for every field `Φ`:
->
-> `I_g(Φ) = 0` ⟺ `Φᵢ = Φⱼ` on every edge ⟺ `Φ` is constant on every connected component.
+When every edge weight is strictly positive,
 
-Both directions. Over ℚ. No limit, no completion, no real line.
+```text
+I_g(Phi) = 0
+  iff Phi_i = Phi_j on every edge
+  iff Phi is constant on every connected component.
+```
 
-**The proof, complete.** Each term is a nonnegative weight times a square, so it is `≥ 0`. A sum of nonnegatives vanishes only if every term does. `w·d² = 0` with `w > 0` forces `d² = 0`, and `d² = 0` forces `d = 0` because ℚ is an integral domain. Equality then propagates along paths; conversely a constant field kills every term.
+The result is proved over the rationals. The audited theorems compile under Coq 8.20 and Rocq 9.2, and `Print Assumptions` reports `Closed under the global context` for each audited result.
 
-Strict positivity is spent exactly once, at the third step. **One edge of weight zero breaks the theorem** — it contributes nothing while its endpoints differ.
+## Status and claim boundary
 
-## What the theorem is for
+This repository makes a deliberately narrow contribution:
 
-Two objects, kept apart, because conflating them is a category mistake:
+- **Standard mathematics:** the kernel characterization is familiar from Dirichlet energy and graph Laplacians.
+- **Formal contribution:** the exact hypotheses, both directions, subspace closure, equivalence relation, and boundary examples are machine checked over `Q`.
+- **Interpretive contribution:** for this declared comparison operator, a zero readout classifies states that the operator does not distinguish.
+- **Not claimed:** a new arithmetic definition of zero, absolute indistinguishability, or novelty over spectral graph theory.
 
-| | |
-|---|---|
-| `0_ℚ` | the rational zero — a value in the **codomain** of the readout |
-| `𝟎_g := I_g⁻¹({0_ℚ})` | its **fibre in the domain** |
+The precise mapping from prose claims to formal results is in [`docs/CLAIM_MATRIX.md`](docs/CLAIM_MATRIX.md). Limitations and falsifiers are in [`docs/SCOPE.md`](docs/SCOPE.md).
 
-**Claim.** The foundational content of a readout returning `0_ℚ` is membership in `𝟎_g`: *the class of fields across which the declared structure retains no difference.* Exact in both directions — by the theorem, not by definition.
+## Verify in under a minute
 
-Two examples fix the meaning and are worth more than the prose:
+### Native installation
 
-- **Zero on a field that is nowhere zero.** Let `Φᵢ = 17` at every vertex of a connected `g`. Then `I_g(Φ) = 0_ℚ`. Nothing is empty, no value is zero, nothing is absent. What is absent is any *difference* for the structure to retain. Any reading of `𝟎_g` as emptiness is thereby unavailable.
-- **Zero across a gap in the declaration.** Let `g` have components `A`, `B` with `Φ = 0` on `A` and `Φ = 17` on `B`. Then `I_g(Φ) = 0_ℚ` although `Φ` is not constant. Where `g` supplies no path it supplies no comparison; the reader was never arranged to tell those apart. The operator is faithful **relative to the declared structure**, not absolutely.
-
-## What is not claimed
-
-- **Not** that `0_ℚ` fails to be a mathematical object. It is a rational, and in a generated number tower it is also the ground of ℕ.
-- **Not** that this displaces any account of arithmetic zero. Frege, set theory and structuralism answer *what kind of thing the number is*; this answers *what a zero-valued reading certifies about the states read*. Different questions.
-- **Not** that the operator is faithful absolutely. See the second example.
-- **Not** novelty against spectral graph theory. Over ℝ it is standard that Dirichlet energy vanishes iff the function is constant on components (Chung; Godsil–Royle). What is offered is that result's **placement as a faithfulness condition**: over ℚ, with the hypothesis explicit, machine-checked without classical axioms, and shown to coincide in both directions with the failure locus of the primitive.
-
-`0_ℚ` is also distinct from the unresolved element `⊥`. `0_ℚ` is a fact about the states — no difference is retained. `⊥` is a fact about the reader — it cannot tell. Only the first is determinate, which is why only the first admits a biconditional.
-
-## Don't trust it. Compile it.
+With Coq 8.20 or Rocq 9.2 available:
 
 ```bash
 git clone https://github.com/morrocwi/zero-readout-certifies.git
@@ -67,53 +50,72 @@ cd zero-readout-certifies
 make verify
 ```
 
-Expected output: five lines reading `Closed under the global context`. GitHub Actions runs the same check under both Coq 8.18 and Coq 8.20. That is Coq reporting that the theorems depend on **no axiom whatsoever** — no `Reals`, no `classic`, no `functional_extensionality`.
+### Docker
 
-Full instructions, including a Docker path and what each check establishes: [`REPRODUCE.md`](REPRODUCE.md).
-
-## Contents
-
-```
-coq/IDM_KeystoneKernel.v   the development — 17 named results, axiom-free
-coq/CheckAssumptions.v     prints the assumption set of each main theorem
-paper/main.tex             the paper (6pp, two-column)
-paper/onepager.tex         one-page summary card
-docs/THEOREMS.md           index of every result, with its role
-docs/SCOPE.md              hypotheses, limitations, and what would falsify the claim
-REPRODUCE.md               verification instructions
-CITATION.cff               machine-readable citation metadata
+```bash
+docker build -t zero-readout-certifies .
+docker run --rm zero-readout-certifies
 ```
 
-## Citing
+The verification gate checks all of the following:
 
-Archived at Zenodo: **[10.5281/zenodo.21665100](https://doi.org/10.5281/zenodo.21665100)**
+1. every `.v` file compiles;
+2. no `Axiom`, `Parameter`, `Conjecture`, or `Admitted` declaration appears in the formal sources;
+3. the number of `Closed under the global context` reports equals the number of audited theorems;
+4. no audited theorem prints an `Axioms:` block.
+
+See [`REPRODUCE.md`](REPRODUCE.md) for exact commands and the limits of what compilation establishes.
+
+## Repository map
+
+| Path | Purpose |
+|---|---|
+| [`coq/IDM_KeystoneKernel.v`](coq/IDM_KeystoneKernel.v) | Core definitions and 17 named mathematical results |
+| [`coq/Examples.v`](coq/Examples.v) | Executable witnesses for the nonzero-constant, zero-weight, and disconnected cases |
+| [`coq/CheckAssumptions.v`](coq/CheckAssumptions.v) | Audited theorem list |
+| [`docs/THEOREMS.md`](docs/THEOREMS.md) | Result index and dependency roles |
+| [`docs/CLAIM_MATRIX.md`](docs/CLAIM_MATRIX.md) | Informal claim to theorem correspondence |
+| [`docs/ARTIFACT_EVALUATION.md`](docs/ARTIFACT_EVALUATION.md) | Reviewer-oriented evaluation protocol |
+| [`paper/main.tex`](paper/main.tex) | Full paper source |
+| [`paper/onepager.tex`](paper/onepager.tex) | One-page technical summary source |
+| [`CITATION.cff`](CITATION.cff) | Machine-readable citation metadata |
+
+PDFs are built in CI and attached to tagged GitHub releases; generated PDFs are not treated as source files.
+
+## Reproduce the paper
+
+```bash
+make paper
+```
+
+This builds `paper/main.pdf` and `paper/onepager.pdf` with hard failure on any LaTeX error. The CI checks that the main paper and one-page summary have the expected page counts.
+
+## Citation
+
+Use GitHub's **Cite this repository** control or cite the archived record:
 
 ```bibtex
-@misc{lahtee2026zero,
-  author       = {Lahtee, Yaoharee},
-  title        = {What a Zero Readout Certifies:
-                  Zero as the Failure Locus of Retained Distinction},
-  year         = {2026},
-  publisher    = {Zenodo},
-  doi          = {10.5281/zenodo.21665100},
-  url          = {https://github.com/morrocwi/zero-readout-certifies},
-  note         = {Preprint, with accompanying Coq development}
+@software{lahtee_zero_readout_2026,
+  author    = {Yaoharee Lahtee},
+  title     = {What a Zero Readout Certifies: Zero as the Failure Locus of Retained Distinction},
+  year      = {2026},
+  version   = {1.0.0},
+  publisher = {Zenodo},
+  doi       = {10.5281/zenodo.21665100},
+  url       = {https://github.com/morrocwi/zero-readout-certifies}
 }
 ```
 
-See also [`CITATION.cff`](CITATION.cff), which GitHub and Zenodo read directly.
+## Contributing and review
 
-## Licence
+Mathematical counterexamples, mismatches between prose and formalization, prior-art corrections, and reproducibility failures are especially welcome. See [`CONTRIBUTING.md`](CONTRIBUTING.md), [`SECURITY.md`](SECURITY.md), and [`SUPPORT.md`](SUPPORT.md).
 
-- **Code** (`coq/`, build files) — [MIT](LICENSE)
-- **Text** (`paper/`, `docs/`, this README) — [CC BY 4.0](LICENSE-TEXT.md)
+## Licensing
 
-Both permit reuse with attribution. If you build on the theorem, a citation is the whole of what is asked.
+- Formal code, scripts, workflows, and build files: [MIT](LICENSE)
+- Paper, documentation, and README: [CC BY 4.0](LICENSE-TEXT.md)
+- File-by-file policy: [`LICENSES.md`](LICENSES.md)
 
-## Corrections
+## AI assistance disclosure
 
-Errors in the mathematics, the proofs, or the prior-art attribution are the most useful thing anyone can send. Open an issue, or write to the address on the paper. Corrections are recorded in [`CHANGELOG.md`](CHANGELOG.md) rather than absorbed silently.
-
----
-
-*Acknowledgements: Walancha Supantarika. Prepared with AI assistance; the stance, the selection of results, and any errors are the author's.*
+Generative AI assisted with editorial drafting, repository scaffolding, and review suggestions. AI output is not treated as mathematical evidence. Formal claims are accepted only when they match the stated prose and pass the machine-checkable verification gates described above.

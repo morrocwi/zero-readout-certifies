@@ -32,11 +32,10 @@
 \vspace{0.15em}
 {\color{mut}\normalsize Zero as the failure locus of retained distinction}\par
 \vspace{0.35em}
-{\color{mut}\footnotesize Yaoharee Lahtee\ \ \textbullet\ \ ORCID 0009-0005-3861-0626\ \ \textbullet\ \ Open Civil Science Initiative\ \ \textbullet\ \ \href{https://doi.org/10.5281/zenodo.21665100}{doi:10.5281/zenodo.21665100}\hfill\itshape (preprint version)}\par
+{\color{mut}\footnotesize Yaoharee Lahtee\ \ \textbullet\ \ ORCID 0009-0005-3861-0626\ \ \textbullet\ \ Open Civil Science Initiative\ \ \textbullet\ \ \href{https://doi.org/10.5281/zenodo.21665100}{doi:10.5281/zenodo.21665100}\hfill\itshape (preprint v1.0.0)}\par
 \vspace{-0.2em}
 {\color{ink}\rule{\linewidth}{0.8pt}}\par\vspace{-0.15em}\fontsize{9}{10.4}\selectfont
 
-%% ---------------------------------------------------------------
 \hd{the setting}
 
 Difference is primitive: to read is to tell two things apart and retain a finite record. A \textbf{declared structure} $g$ is a finite weighted graph stating which pairs this reader is arranged to compare. A field $\Phi$ assigns a rational to each vertex. The retained information of $\Phi$ is
@@ -47,7 +46,6 @@ I_g(\Phi)\;=\;\sum_{(i,j,w)\in g} w\,(\Phi_i-\Phi_j)^2
 \]\vspace{-0.55em}
 Everything is over $\mathbb{Q}$. No limit, no completion, no real line.
 
-%% ---------------------------------------------------------------
 \hd{the theorem}
 
 \begin{tcolorbox}[colback=pale,colframe=ink,boxrule=0.9pt,arc=1pt,left=9pt,right=9pt,top=4pt,bottom=4pt]
@@ -61,7 +59,6 @@ I_g(\Phi)=\zQ
 \]
 \end{tcolorbox}
 
-%% ---------------------------------------------------------------
 \hd{the proof, complete}
 
 \begin{enumerate}[leftmargin=1.45em,itemsep=0pt,topsep=0pt,parsep=0pt]
@@ -73,7 +70,6 @@ I_g(\Phi)=\zQ
 
 {\color{mut}Strict positivity is spent exactly once, at step 3. One edge of weight $0$ breaks the theorem: it contributes nothing while its endpoints differ.}
 
-%% ---------------------------------------------------------------
 \hd{two examples that fix the meaning}
 
 \begin{tcolorbox}[colback=white,colframe=mut,boxrule=0.4pt,arc=1pt,left=8pt,right=8pt,top=3.5pt,bottom=3.5pt]
@@ -83,7 +79,6 @@ I_g(\Phi)=\zQ
 \textbf{Zero across a gap in the declaration.}\ \ Let $g$ have components $A,B$ with $\Phi=0$ on $A$ and $\Phi=17$ on $B$. Then $I_g(\Phi)=\zQ$ although $\Phi$ is not constant. Where $g$ supplies no path it supplies no comparison; the reader was never arranged to tell those apart.
 \end{tcolorbox}
 
-%% ---------------------------------------------------------------
 \hd{what the theorem licenses}
 
 Two objects, marked apart, because conflating them is a category mistake:
@@ -94,7 +89,7 @@ Two objects, marked apart, because conflating them is a category mistake:
 \]\vspace{-0.55em}
 
 \begin{tcolorbox}[colback=white,colframe=acc,boxrule=0.9pt,arc=1pt,left=9pt,right=9pt,top=4pt,bottom=4pt]
-\textbf{Claim.} The foundational content of a readout returning $\zQ$ is membership in $\zg$: \emph{the class of fields across which the declared structure retains no difference.} Exact in both directions, by the theorem --- not by definition.
+\textbf{Claim.} For this operator under the stated hypotheses, a readout returning $\zQ$ certifies membership in $\zg$: \emph{the class of fields across which the declared structure retains no difference.} Exact in both directions, by theorem --- not by definition.
 \end{tcolorbox}
 
 \vspace{0.2em}
@@ -102,19 +97,18 @@ Two objects, marked apart, because conflating them is a category mistake:
 
 \textbf{Also not this.} $\zQ$ is a fact about the states: no difference is retained. The unresolved element $\bot$ is a fact about the reader: it cannot tell. Only the first is determinate, which is why only the first admits a biconditional.
 
-%% ---------------------------------------------------------------
 \hd{status}
 
 {\scriptsize
-The mathematics is elementary and classical over $\mathbb{R}$ (Dirichlet energy vanishes iff constant on components; Chung, Godsil--Royle). \textbf{No novelty is claimed against it.} What is offered is its placement as a \emph{faithfulness condition}: over $\mathbb{Q}$, with the hypothesis explicit, machine-checked without classical axioms, and shown to coincide in both directions with the failure locus of the primitive --- closing a join that was previously carried by interpretation.
+The mathematics is elementary and classical over $\mathbb{R}$ (Dirichlet energy vanishes iff constant on components; Chung, Godsil--Royle). \textbf{No novelty is claimed against it.} What is offered is its placement as a \emph{faithfulness condition}: over $\mathbb{Q}$, with the hypothesis explicit, machine-checked with no additional global assumptions reported for the audited constants, and shown to coincide in both directions with the failure locus of the primitive --- closing a join that was previously carried by interpretation.
 
 \vspace{0.3em}
-Verified in Coq: 17 named results, \verb|Print Assumptions| $=$ \emph{Closed under the global context} on each. No \verb|Reals|, no \verb|classic|. Source: \href{https://github.com/morrocwi/zero-readout-certifies}{github.com/morrocwi/zero-readout-certifies}\ \ \textbullet\ \ archived at \href{https://doi.org/10.5281/zenodo.21665100}{doi:10.5281/zenodo.21665100}. Don't take the proof on trust --- compile it.
+Verified under Coq 8.20 and Rocq 9.2: the audited constants report \emph{Closed under the global context}. The repository also includes executable witnesses for the strict-positivity and disconnectedness boundaries. Source: \href{https://github.com/morrocwi/zero-readout-certifies}{github.com/morrocwi/zero-readout-certifies}\ \ \textbullet\ \ archived at \href{https://doi.org/10.5281/zenodo.21665100}{doi:10.5281/zenodo.21665100}. Review the claim matrix, then compile the artifact.
 }
 
 \vspace{0.15em}
 {\color{ink}\rule{\linewidth}{0.4pt}}
 \vspace{0.05em}
-{\color{mut}\scriptsize\itshape Arithmetic supplies the symbol $\zQ$; the retained-difference theorem determines what a legitimate occurrence of that symbol certifies.}
+{\color{mut}\scriptsize\itshape Arithmetic supplies the symbol $\zQ$; under the stated hypotheses, the theorem determines what a zero returned by this operator certifies.}
 
 \end{document}

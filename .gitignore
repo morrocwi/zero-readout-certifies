@@ -7,3 +7,5 @@
 *.log
 *.out
 *.synctex.gz
+coq/assumptions.txt
+paper/*.pdf

@@ -1,93 +1,83 @@
-# Reproducing the verification
+# Reproducing the artifact
 
-Everything in this repository is checkable on your own machine in under a minute. Nothing depends on trusting the author, the paper, or a hosted service.
+This repository separates four checks that are often conflated: proof compilation, assumption auditing, prose-to-formalization comparison, and paper generation.
 
-## What you are checking
+## Supported provers
 
-Two things, and they are different:
+CI checks the development under:
 
-1. **The proofs are correct.** `coqc` accepts the development. If a step were wrong, it would not compile.
-2. **The proofs use no axioms.** `Print Assumptions` reports *Closed under the global context* for each main theorem. This is Coq stating that the result rests on nothing beyond the calculus itself — no `Reals`, no `classic`, no `functional_extensionality`, no admitted lemma.
-The repository CI repeats this verification under both Coq 8.18 and Coq 8.20.
+- Coq 8.20, using `coqc`;
+- Rocq 9.2, using `rocq compile`.
 
-The second is the stronger claim and the one worth checking. A proof can be correct and still lean on a classical axiom; these do not.
+The source imports only the standard `List`, `QArith`, and `PeanoNat` libraries.
 
-## Requirements
-
-- **Coq 8.18 or later.** Verified on 8.18 and expected to hold on 8.20.
-- Nothing else. The development imports only `List`, `QArith` and `ListNotations` from the standard library.
-
-Install on Debian/Ubuntu:
-
-```bash
-sudo apt-get install coq
-```
-
-Or via opam:
-
-```bash
-opam install coq
-```
-
-## Run it
+## One-command verification
 
 ```bash
 make verify
 ```
 
-Expected output: **five** lines, each reading
+The command compiles the core development, executable witnesses, and assumption audit. The audit count is derived from the number of `Print Assumptions` commands, so adding a theorem to the audit cannot silently leave the expected count stale.
 
+A successful run ends with a message such as:
+
+```text
+verified 13 audited results with no additional global assumptions
 ```
-Closed under the global context
+
+## Docker verification
+
+```bash
+docker build -t zero-readout-certifies .
+docker run --rm zero-readout-certifies
 ```
 
-one for each of `keystone_zero_iff_edge`, `keystone_zero_iff_component`, `kernel_add`, `kernel_scale` and `indist_trans` — the two main theorems and the three results that make the zero locus classify. Any other output — an error, an `Axioms:` heading, a missing line — means something is wrong and should be reported.
+To test the latest supported Rocq line without building the repository image:
 
-## Run it by hand
+```bash
+docker run --rm -v "$PWD:/src:ro" rocq/rocq-prover:9.2 \
+  bash -lc 'cp -a /src /tmp/repo && cd /tmp/repo && make verify COQC="rocq compile"'
+```
 
-If you would rather not trust the Makefile either:
+## Manual commands
 
 ```bash
 cd coq
 coqc -q IDM_KeystoneKernel.v
-coqc -q -I . CheckAssumptions.v
+coqc -q Examples.v
+coqc -q CheckAssumptions.v
 ```
 
-To inspect a single result:
+For Rocq 9.2, replace `coqc` with `rocq compile`.
 
-```bash
-coqtop -q -I .
-```
-
-```coq
-Require Import IDM_KeystoneKernel.
-Check keystone_zero_iff_edge.
-Print Assumptions keystone_zero_iff_edge.
-```
-
-## In Docker
-
-If you would rather not install Coq at all:
-
-```bash
-docker run --rm -v "$PWD":/work -w /work/coq coqorg/coq:8.18 \
-  bash -c "coqc -q IDM_KeystoneKernel.v && coqc -q -I . CheckAssumptions.v"
-```
-
-## Rebuilding the paper
+## Paper build
 
 ```bash
 make paper
 ```
 
-Requires a TeX Live installation with `mathpazo`, `microtype`, `tcolorbox`, `booktabs`, `titlesec`, `fancyhdr` and `hyperref` — all present in a standard `texlive-full`. The PDFs are also committed, so this step is optional.
+The build uses `-halt-on-error` and `-file-line-error`, runs the main paper twice for stable references, and checks that the summary remains one page when `pdfinfo` is available.
 
-## What compiling does *not* establish
+## Repository audit
 
-Worth stating, since the distinction is easy to lose.
+```bash
+make audit
+```
 
-- It does not establish that the theorem is **new**. It is not; the real-variable analogue is standard in spectral graph theory, and the paper says so.
-- It does not establish that the **philosophical claim** is correct. That claim is argued in the paper and the argument is open to dispute; the theorem constrains it but does not settle it.
-- It does not establish that the **formalisation matches the informal statement**. Read `coq/IDM_KeystoneKernel.v` and compare it against §3 of the paper. The definitions are short and deliberately unclever precisely so that this comparison is easy.
+This checks required files, rejects temporary split sources and generated compiler artifacts, and validates the JSON metadata syntactically. CI additionally validates `CITATION.cff` with `cffconvert`.
 
-The last point is the one a careful reader should actually spend time on. A machine check is only as good as the statement it checks.
+## What compilation establishes
+
+A successful formal run establishes that the checked statements are accepted by the selected prover and that the audited constants report no additional global assumptions. It also confirms that the repository contains no forbidden global assumption declarations or admitted proofs in `coq/*.v`.
+
+## What compilation does not establish
+
+Compilation does not establish:
+
+- novelty against the mathematical literature;
+- truth of the philosophical interpretation;
+- completeness of the literature review;
+- that the formal definitions are the uniquely correct rendering of the prose;
+- security or correctness of the prover implementation itself.
+
+The prose/formalization comparison is therefore a required human review step. `docs/CLAIM_MATRIX.md` and `docs/ARTIFACT_EVALUATION.md` are designed to make that step short and explicit.

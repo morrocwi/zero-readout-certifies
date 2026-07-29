@@ -1,0 +1,9 @@
+.git
+.github
+paper/*.pdf
+paper/*.aux
+paper/*.log
+coq/*.vo
+coq/*.vok
+coq/*.vos
+coq/*.glob

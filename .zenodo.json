@@ -1,0 +1,30 @@
+{
+  "title": "What a Zero Readout Certifies: Zero as the Failure Locus of Retained Distinction",
+  "description": "A machine-checked characterization of the zero fibre of a finite positively weighted retained-difference operator over the rationals, with a companion philosophy-of-mathematics paper and reproducible artifact.",
+  "creators": [
+    {
+      "name": "Lahtee, Yaoharee",
+      "orcid": "0009-0005-3861-0626",
+      "affiliation": "Open Civil Science Initiative"
+    }
+  ],
+  "license": "MIT",
+  "upload_type": "software",
+  "keywords": [
+    "zero fibre",
+    "retained difference",
+    "graph Laplacian",
+    "Dirichlet energy",
+    "formal verification",
+    "Rocq",
+    "Coq",
+    "philosophy of mathematics"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/morrocwi/zero-readout-certifies",
+      "relation": "isSupplementTo",
+      "scheme": "url"
+    }
+  ]
+}

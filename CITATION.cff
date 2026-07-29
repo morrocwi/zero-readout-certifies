@@ -1,45 +1,46 @@
 cff-version: 1.2.0
-title: >-
-  What a Zero Readout Certifies: Zero as the Failure Locus of
-  Retained Distinction
 message: >-
-  If you use this work, please cite it using the metadata
-  below.
+  Please cite the archived software release. For discussion of the interpretive
+  argument, use the preferred citation below.
+title: zero-readout-certifies
 type: software
+version: '1.0.0'
+date-released: '2026-07-29'
+doi: 10.5281/zenodo.21665100
+repository-code: 'https://github.com/morrocwi/zero-readout-certifies'
+url: 'https://github.com/morrocwi/zero-readout-certifies'
+license: MIT
 authors:
   - given-names: Yaoharee
     family-names: Lahtee
     orcid: 'https://orcid.org/0009-0005-3861-0626'
     affiliation: Open Civil Science Initiative
-identifiers:
-  - type: doi
-    value: 10.5281/zenodo.21665100
-    description: Archived record of this repository
-repository-code: 'https://github.com/morrocwi/zero-readout-certifies'
 abstract: >-
-  Arithmetic supplies the symbol 0; it does not say what a
-  measurement returning that symbol has established. For the
-  retained-information operator on a positively weighted
-  comparison graph, the zero locus is shown to coincide, in
-  both directions, with the locus at which no difference is
-  retained across the declared structure — equivalently, with
-  the fields constant on each connected component. The
-  characterisation is machine-checked in Coq over the
-  rationals without classical axioms. The paper argues that a
-  zero readout is therefore not an absence but a
-  classification, relative to the declared structure of
-  comparison, and distinguishes it from an unresolved
-  reading.
+  A machine-checked characterization of the zero fibre of a finite positively
+  weighted retained-difference operator over the rationals, together with a
+  companion philosophy-of-mathematics paper. The formal artifact proves the
+  edge and connected-component characterizations, closure of the zero locus,
+  and the induced equivalence relation, and includes executable boundary
+  witnesses.
 keywords:
-  - zero
+  - zero fibre
   - retained difference
   - graph Laplacian
   - Dirichlet energy
-  - equivalence class
+  - equivalence relation
   - formal verification
+  - Rocq
   - Coq
   - philosophy of mathematics
-license: MIT
-license-url: 'https://github.com/morrocwi/zero-readout-certifies/blob/main/LICENSE'
-version: '1.0.0'
-date-released: '2026-07-29'
+preferred-citation:
+  type: unpublished
+  title: >-
+    What a Zero Readout Certifies: Zero as the Failure Locus of Retained
+    Distinction
+  authors:
+    - given-names: Yaoharee
+      family-names: Lahtee
+      orcid: 'https://orcid.org/0009-0005-3861-0626'
+  year: 2026
+  doi: 10.5281/zenodo.21665100
+  url: 'https://github.com/morrocwi/zero-readout-certifies'

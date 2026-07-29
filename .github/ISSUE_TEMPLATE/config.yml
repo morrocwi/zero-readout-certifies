@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Archived research record
+    url: https://doi.org/10.5281/zenodo.21665100
+    about: View the cited archival record.

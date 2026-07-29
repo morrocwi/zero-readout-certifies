@@ -1,0 +1,27 @@
+{
+  "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
+  "@type": "SoftwareSourceCode",
+  "name": "zero-readout-certifies",
+  "description": "Machine-checked characterization of the zero fibre of a finite positively weighted retained-difference operator over the rationals.",
+  "version": "1.0.0",
+  "datePublished": "2026-07-29",
+  "codeRepository": "https://github.com/morrocwi/zero-readout-certifies",
+  "identifier": "https://doi.org/10.5281/zenodo.21665100",
+  "license": "https://spdx.org/licenses/MIT.html",
+  "programmingLanguage": ["Coq", "Rocq", "TeX", "Shell"],
+  "runtimePlatform": ["Coq 8.20", "Rocq 9.2"],
+  "author": [{
+    "@type": "Person",
+    "givenName": "Yaoharee",
+    "familyName": "Lahtee",
+    "@id": "https://orcid.org/0009-0005-3861-0626",
+    "affiliation": {"@type": "Organization", "name": "Open Civil Science Initiative"}
+  }],
+  "keywords": [
+    "zero fibre",
+    "graph Laplacian",
+    "Dirichlet energy",
+    "formal verification",
+    "philosophy of mathematics"
+  ]
+}

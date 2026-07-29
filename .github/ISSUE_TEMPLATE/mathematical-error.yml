@@ -1,0 +1,26 @@
+name: Mathematical or formalization error
+description: Report a counterexample, proof defect, or mismatch between prose and code.
+title: "[math] "
+labels: [mathematics]
+body:
+  - type: textarea
+    id: target
+    attributes:
+      label: Exact target
+      description: Name the theorem, definition, paper section, or claim-matrix row.
+    validations:
+      required: true
+  - type: textarea
+    id: issue
+    attributes:
+      label: Problem
+      description: State the counterexample, invalid inference, or mismatch precisely.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Reproduction or evidence
+      description: Include commands, formal terms, calculations, or citations.
+    validations:
+      required: true
