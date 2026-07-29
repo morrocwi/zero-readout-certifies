@@ -16,6 +16,8 @@ paper:
 	@cd paper && $(LATEX) -halt-on-error -file-line-error -interaction=nonstopmode onepager.tex >/dev/null
 	@if grep -F 'Overfull \hbox' paper/main.log paper/onepager.log >/dev/null || grep -F 'Overfull \vbox' paper/main.log paper/onepager.log >/dev/null; then \
 		echo "LaTeX layout overflow detected" >&2; \
+		grep -n -B 1 -A 2 -F 'Overfull \hbox' paper/main.log paper/onepager.log >&2 || true; \
+		grep -n -B 1 -A 2 -F 'Overfull \vbox' paper/main.log paper/onepager.log >&2 || true; \
 		exit 1; \
 	fi
 	@if command -v pdfinfo >/dev/null 2>&1; then \
