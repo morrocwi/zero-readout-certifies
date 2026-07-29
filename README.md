@@ -2,9 +2,9 @@
 
 **A machine-checked characterization of the zero fibre of a finite retained-difference operator.**
 
-[![formal verification](https://github.com/morrocwi/zero-readout-certifies/actions/workflows/verify.yml/badge.svg)](https://github.com/morrocwi/zero-readout-certifies/actions/workflows/verify.yml)
+[![formal verification](https://github.com/morrocwi/zero-readout-certifies/actions/workflows/verify.yml/badge.svg?branch=main)](https://github.com/morrocwi/zero-readout-certifies/actions/workflows/verify.yml)
+[![Rocq 9.2 verification](https://github.com/morrocwi/zero-readout-certifies/actions/workflows/rocq.yml/badge.svg?branch=main)](https://github.com/morrocwi/zero-readout-certifies/actions/workflows/rocq.yml)
 [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21665100-blue)](https://doi.org/10.5281/zenodo.21665100)
-[![Rocq](https://img.shields.io/badge/Rocq-9.2-5A3E85)](https://rocq-prover.org/)
 [![Coq](https://img.shields.io/badge/Coq-8.20-compatible-6D4AFF)](https://coq.inria.fr/)
 [![code license](https://img.shields.io/badge/code-MIT-green)](LICENSE)
 [![text license](https://img.shields.io/badge/text-CC%20BY%204.0-green)](LICENSE-TEXT.md)

@@ -1,0 +1,28 @@
+name: Rocq verification
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: rocq-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  rocq:
+    name: Rocq 9.2 formal verification
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile and audit with Rocq 9.2
+        run: >-
+          docker run --rm
+          -v "${GITHUB_WORKSPACE}:/src:ro"
+          rocq/rocq-prover:9.2
+          bash -lc
+          'cp -a /src /tmp/zero-readout && cd /tmp/zero-readout && make verify COQC="rocq compile"'
